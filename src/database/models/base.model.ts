@@ -27,8 +27,10 @@ export const defaultHiddenFields = [
 ] as const
 
 export type DefaultHiddenFields = typeof defaultHiddenFields[number]
-
-export type OmitHiddenFields<T> = Omit<T, DefaultHiddenFields>
+export type OmitHiddenFields<
+  T,
+  AdditionalHiddenFields extends '' | keyof T = '',
+> = Omit<T, DefaultHiddenFields | AdditionalHiddenFields>
 
 type PrismaClientDefaultProps = `$${string}`
 type PrismaClientModelDelegateName = keyof Omit<
